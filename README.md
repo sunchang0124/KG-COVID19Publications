@@ -17,7 +17,7 @@ Publications about COVID-19 are rapidly growing at this moment. In order to prov
 
 - The dataset of COVID-19 publications has many missing values. The following picture shows the completeness of the dataset (updated at 14-04-2020) using ```check_missing``` function in ```publicationsData.ipynb```
 
-<img src="https://github.com/sunchang0124/KG-COVID19Publications/raw/master/img/completeness.png" alt="alt text" style="zoom:40%;" />
+<img src="https://github.com/sunchang0124/KG-COVID19Publications/raw/master/img/completeness.png" height="500">
 
 - We only keep the key information for converting xlsx file to RDF using  ```publicationsData.ipynb```
   - *Title*
@@ -70,14 +70,15 @@ ORDER BY DESC(?count)
 
 
 
--  Example 2: Query all COVID-19 publications related to diabetes 
+-  Example 2: Query all COVID-19 publications related to diabetes and heart diseases 
 
 ```SPARQL
 PREFIX covidPub: <http://covid19publication.org/keyword/>
 PREFIX dc: <http://purl.org/dc/elements/1.1/> 
 select ?paper ?title where { 
 	?paper dc:subject covidPub:diabetes .
-    ?paper dc:title ?title . 
+	?paper dc:subject covidPub:diabetes .
+    	?paper dc:title ?title . 
 }
 ```
 
