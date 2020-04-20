@@ -1,5 +1,5 @@
 # KG-COVID19Publications
-Publications about COVID-19 are rapidly growing at this moment. In order to provide an efficient and easy way for researchers to be kept updated, I created a knowledge graph for COVID-19 publications. The knowledge graph will be updated every week. 
+Publications about COVID-19 are rapidly growing at this moment. In order to provide an efficient and easy way for researchers to be kept updated and have an overview of the current publications, I created a knowledge graph for COVID-19 publications. The knowledge graph will be updated every week. 
 
 - Until 20-04-2020, 299,652 triples (based on 12116 publications) are in the current KG.
 
@@ -17,7 +17,7 @@ Publications about COVID-19 are rapidly growing at this moment. In order to prov
 
 - The dataset of COVID-19 publications has many missing values. The following picture shows the completeness of the dataset (updated at 14-04-2020) using ```check_missing``` function in ```publicationsData.ipynb```
 
-  
+<img src="https://github.com/sunchang0124/KG-COVID19Publications/raw/master/img/completeness.png" alt="alt text" style="zoom:40%;" />
 
 - We only keep the key information for converting xlsx file to RDF using  ```publicationsData.ipynb```
   - *Title*
@@ -54,31 +54,34 @@ Publications about COVID-19 are rapidly growing at this moment. In order to prov
 
 - **[Dublin Core Metadata Initiative Metadata Terms](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/)** is mainly used as the vocabulary.
 - RML ([rmlmapper.jar](https://github.com/RMLio/rmlmapper-java/releases/download/v4.3.1/rmlmapper.jar)) is the mapping tool to convert CSV file to RDF. Please follow the Knowledge Graph Course Material provided by Institute of Data Science at Maastricht University ([Github repo](https://github.com/MaastrichtU-IDS/UM_KEN4256_KnowledgeGraphs)) to learn the convertion.
-
 - Converted RDF data are uploaded to GraphDB triple store.
 
 ### Query publications using SPARQL
 
 -  Example 1: Query the authors ordered by the number of their publications related to COVID-19
 
-  ```SPARQL
-  PREFIX pav: <http://purl.org/pav/> 
-  select ?author (count(distinct ?paper) as ?count)  where { 
-  	?paper pav:authoredBy ?author .
-  } GROUP BY ?author
-  ORDER BY DESC(?count)
-  ```
+```SPARQL
+PREFIX pav: <http://purl.org/pav/> 
+select ?author (count(distinct ?paper) as ?count)  where { 
+	?paper pav:authoredBy ?author .
+} GROUP BY ?author
+ORDER BY DESC(?count)
+```
 
-- Example 2: Query all COVID-19 publications related to diabetes 
 
-  ```SPARQL
-  PREFIX covidPub: <http://covid19publication.org/keyword/>
-  PREFIX dc: <http://purl.org/dc/elements/1.1/> 
-  select ?paper ?title where { 
-  	?paper dc:subject covidPub:diabetes .
-      ?paper dc:title ?title . 
-  }
-  ```
 
-  
+-  Example 2: Query all COVID-19 publications related to diabetes 
+
+```SPARQL
+PREFIX covidPub: <http://covid19publication.org/keyword/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+select ?paper ?title where { 
+	?paper dc:subject covidPub:diabetes .
+    ?paper dc:title ?title . 
+}
+```
+
+
+
+
 
