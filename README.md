@@ -77,7 +77,7 @@ PREFIX covidPub: <http://covid19publication.org/keyword/>
 PREFIX dc: <http://purl.org/dc/elements/1.1/> 
 select ?paper ?title where { 
 	?paper dc:subject covidPub:diabetes .
-	?paper dc:subject covidPub:diabetes .
+	?paper dc:subject covidPub:heart .
     	?paper dc:title ?title . 
 }
 ```
